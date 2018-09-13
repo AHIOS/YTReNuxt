@@ -1,6 +1,6 @@
 # YTReNuxt
 
-> My extraordinary Nuxt.js project
+> My fabulous Nuxt.js project
 
 ## Build Setup
 
