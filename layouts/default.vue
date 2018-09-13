@@ -20,6 +20,6 @@ import TheHeader from '@/components/TheHeader';
     },
     props: {
       source: String
-    }
+    },
   }
 </script>
