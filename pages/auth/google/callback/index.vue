@@ -22,11 +22,12 @@ export default {
                     .then(response => {
                         // JSON responses are automatically parsed.
                         console.log('axios ok');
-                        this.payload = response.data;
+                        this.payload = response.data || 'OK';
                     })
                     .catch(e => {
                         this.errors.push(e);
-                        console.log('axios ok');
+                        console.log('axios KO');
+                        this.payload = response.data || 'something went wrong';
                     });
                 //   this.$router.push({ path: '/api/v1/auth/google/callback', query: this.$route.query})
               }, 3000);
