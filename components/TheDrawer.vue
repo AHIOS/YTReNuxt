@@ -45,10 +45,10 @@
 export default {
     data: () => ({
       items: [
-        { icon: 'trending_up', text: 'My recipes', to:'inspire' },
-        { icon: 'subscriptions', text: 'Subscriptions', to:'/' },
+        { icon: 'exit_to_app', text: 'Login', to:'/login' },
+        { icon: 'subscriptions', text: 'Subscriptions', to:'/inspire' },
         { icon: 'history', text: 'History', to:'inspire' },
-        { icon: 'featured_play_list', text: 'Playlists', to:'/' },
+        { icon: 'featured_play_list', text: 'Playlists', to:'/inspire' },
         { icon: 'watch_later', text: 'Watch Later', to:'inspire' }
       ],
       items2: [
