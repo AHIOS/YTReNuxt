@@ -22,14 +22,16 @@ export default {
                     .then(response => {
                         // JSON responses are automatically parsed.
                         console.log('axios ok');
-                        this.payload = response.data || 'OK';
+                        this.payload = !!response.data ? response.data : 'OK';
                     })
                     .catch(e => {
                         this.errors.push(e);
                         console.log('axios KO');
-                        this.payload = response.data || 'something went wrong';
+                        this.payload = 'something went wrong';
                     });
-                //   this.$router.push({ path: '/api/v1/auth/google/callback', query: this.$route.query})
+                    setTimeout(() => {
+                        this.$router.push({ path: '/'});
+                    },1000);
               }, 3000);
   	    }
   	},
