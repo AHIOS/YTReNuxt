@@ -25,8 +25,9 @@ export default {
                         this.payload = !!response.data ? response.data : 'OK';
                     })
                     .catch(e => {
-                        this.errors.push(e);
-                        console.log('axios KO');
+                        // this.errors.push(e);
+                        console.log('axios KO: ' + e);
+                        );
                         this.payload = 'something went wrong';
                     });
                     setTimeout(() => {
