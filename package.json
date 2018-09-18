@@ -16,9 +16,9 @@
     "@nuxtjs/axios": "^5.0.0",
     "feathers-vuex": "^1.4.8",
     "nuxt": "^1.0.0",
-    "vuetify": "^1.0.19",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1"
+    "stylus-loader": "^3.0.1",
+    "vuetify": "^1.0.19"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

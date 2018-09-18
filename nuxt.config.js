@@ -5,6 +5,11 @@ const nodeExternals = require('webpack-node-externals')
 module.exports = {
   mode: 'universal',
 
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3030/api/v1'
+  },
+
+
   /*
   ** Headers of the page
   */

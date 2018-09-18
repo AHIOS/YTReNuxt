@@ -10,29 +10,28 @@ export default {
     }),
   	methods:{
   		callbackToBackend() {
-              setTimeout(() => {
-                  const url = 'http://localhost:3030/api/v1/auth/google/callback?' + 
-                            "code=" + this.$route.query.code + 
-                            "&scope="+ this.$route.query.scope + 
-                            "&authuser=" + this.$route.query.authuser + 
-                            "&session_state=" + this.$route.query.session_state + 
-                            "&prompt=" + this.$route.query.prompt;
-                    console.log("REDIRECTING to " + url);
-                  axios.get(url)
-                    .then(response => {
-                        // JSON responses are automatically parsed.
-                        console.log('axios ok');
-                        this.payload = !!response.data ? response.data : 'OK';
-                    })
-                    .catch(e => {
-                        // this.errors.push(e);
-                        console.log('axios KO: ' + e);
-                        this.payload = 'something went wrong';
-                    });
-                    setTimeout(() => {
-                        this.$router.push({ path: '/'});
-                    },1000);
-              }, 3000);
+              console.log('BASE URL = ' + process.env.baseUrl);
+              this.payload = process.env.baseUrl;
+            const url = process.env.baseUrl +
+                    "/auth/google/callback?" + 
+                    "code=" + this.$route.query.code + 
+                    "&scope="+ this.$route.query.scope + 
+                    "&authuser=" + this.$route.query.authuser + 
+                    "&session_state=" + this.$route.query.session_state + 
+                    "&prompt=" + this.$route.query.prompt;
+            axios.get(url)
+            .then(response => {
+                // JSON responses are automatically parsed.
+                console.log('axios ok');
+                this.payload = !!response.data ? response.data : 'OK';
+                this.$router.push({ path: '/', query: this.$route.query})
+            })
+            .catch(e => {
+                // this.errors.push(e);
+                console.log('axios KO: ' + e);
+                this.payload = 'something went wrong';
+                this.$router.push({ path: '/', query: this.$route.query})
+            });
   	    }
   	},
   	created: function () {
