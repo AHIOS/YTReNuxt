@@ -27,7 +27,6 @@ export default {
                     .catch(e => {
                         // this.errors.push(e);
                         console.log('axios KO: ' + e);
-                        );
                         this.payload = 'something went wrong';
                     });
                     setTimeout(() => {
