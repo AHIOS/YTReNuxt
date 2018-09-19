@@ -5,11 +5,6 @@ const nodeExternals = require('webpack-node-externals')
 module.exports = {
   mode: 'universal',
 
-  env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:3030/api/v1'
-  },
-
-
   /*
   ** Headers of the page
   */
@@ -57,6 +52,8 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'http://localhost:3030',
+    browserBaseURL: '/api/v1'
   },
 
   /*
@@ -67,6 +64,11 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
+      console.log('ctx.isDev ' + ctx.isDev);
+      console.log('ctx.isClient ' + ctx.isClient);
+      console.log('ctx.isServer ' + ctx.isServer);
+      console.log('process.env.API_URL ' + process.env.API_URL);
+
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
