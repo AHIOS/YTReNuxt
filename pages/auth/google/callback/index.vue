@@ -10,11 +10,8 @@ export default {
     }),
   	methods:{
   		callbackToBackend() {
-              console.log('BASE URL = ' + process.env.baseUrl);
-              this.payload = process.env.baseUrl;
-            const url = process.env.baseUrl +
-                    "/auth/google/callback?" + 
-                    "code=" + this.$route.query.code + 
+            const url = "/api/v1/auth/google/callback/" + 
+                    "?code=" + this.$route.query.code + 
                     "&scope="+ this.$route.query.scope + 
                     "&authuser=" + this.$route.query.authuser + 
                     "&session_state=" + this.$route.query.session_state + 
@@ -30,7 +27,7 @@ export default {
                 // this.errors.push(e);
                 console.log('axios KO: ' + e);
                 this.payload = 'something went wrong';
-                this.$router.push({ path: '/', query: this.$route.query})
+                //this.$router.push({ path: '/', query: this.$route.query})
             });
   	    }
   	},

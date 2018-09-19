@@ -64,11 +64,6 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      console.log('ctx.isDev ' + ctx.isDev);
-      console.log('ctx.isClient ' + ctx.isClient);
-      console.log('ctx.isServer ' + ctx.isServer);
-      console.log('process.env.API_URL ' + process.env.API_URL);
-
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
