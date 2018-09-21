@@ -4,6 +4,15 @@ const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   mode: 'universal',
+  // router: {
+  //   extendRoutes (routes, resolve) {
+  //     routes.push({
+  //       name: 'proxy',
+  //       path: '/api/v1/',
+  //       component: resolve(__dirname, 'pages/auth/google/callback/index.vue')
+  //     })
+  //   }
+  // },
 
   /*
   ** Headers of the page
@@ -53,7 +62,14 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: process.env.API_URL || 'http://localhost:3030',
-    browserBaseURL: '/api/v1'
+    browserBaseURL: process.env.API_URL ? process.env.API_URL + '/api/v1' : '/api/v1',
+    proxy: true,
+    debug: true
+  },
+
+  proxy: {
+    '/api/v1/': { target: 'http://localhost:3030/' },
+    '/auth/google/': { target: 'http://localhost:3030/api/v1/' }
   },
 
   /*
