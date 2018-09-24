@@ -63,7 +63,7 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: process.env.API_URL || 'http://localhost:3030',
     browserBaseURL: process.env.API_URL ? process.env.API_URL + '/api/v1' : '/api/v1',
-    proxy: true,
+    proxy: false,
     debug: true
   },
 
