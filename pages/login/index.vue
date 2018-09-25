@@ -1,5 +1,5 @@
 <template>
-  <v-btn href="/api/v1/auth/google"> Google </v-btn>
+  <v-btn href="/auth/google"> Google </v-btn>
 </template>
 
 <script>

@@ -54,8 +54,17 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
+
+  proxy:{
+    '/auth/google': { 
+      target: process.env.API_URL || 'http://localhost:3030/api/v1',
+      changeOrigin: true
+    }
+  },
+
   /*
   ** Axios module configuration
   */
@@ -63,13 +72,8 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: process.env.API_URL || 'http://localhost:3030',
     // browserBaseURL: process.env.API_URL ? process.env.API_URL : '/api/v1',
-    proxy: true,
+    // proxy: true,
     debug: true
-  },
-
-  proxy: {
-    // '/api/v1/': { target: 'http://localhost:3030/' },
-    '/auth/google/callback': { target: process.env.API_URL }
   },
 
   /*
