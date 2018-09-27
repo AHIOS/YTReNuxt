@@ -13,16 +13,29 @@
         <span class="title">YTReNuxt</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-layout row align-center style="max-width: 650px">
-        <v-text-field
-          @click:append="() => {}"
-          placeholder="Search..."
-          single-line
-          append-icon="search"
-          color="white"
-          hide-details
-        ></v-text-field>
-      </v-layout>
+      <v-menu :nudge-width="100">
+        <v-list-tile avatar slot="activator">
+            <v-list-tile-avatar>
+              <img :src="`${user.photoUrl}`" alt="">
+            </v-list-tile-avatar>
+            <v-list-tile-title v-text="user.displayName"></v-list-tile-title>
+            <v-icon dark>arrow_drop_down</v-icon>
+          </v-list-tile>
+        <v-list>
+          <v-list-tile>
+            <v-list-tile-action>
+              <v-icon>settings</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Settings</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-action>
+              <v-icon>exit_to_app</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Logout</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
     </v-toolbar>
     <the-drawer 
         :isOpen="this.drawer"
@@ -38,8 +51,24 @@ export default {
       TheDrawer
     },
     data: () => ({
-      drawer: true
+      drawer: true,
+      user: {
+        email: '',
+        googleId: '',
+        displayName: 'Name Surname',
+        photoUrl: 'https://randomuser.me/api/portraits/men/1.jpg'
+      },
+      items:[
+        'logout',
+        'profile'
+      ]
     }),
+    methods:{
+      created: function () {
+        const {user} = this.$FeathersVuex;
+        console.log(user);
+      }
+    },
 }
 </script>
 

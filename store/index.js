@@ -14,7 +14,7 @@ const createStore = () => {
                         email: '',
                         googleId: '',
                         displayName: '',
-                        photoUrl: 'https://randomuser.me/api/portraits/men/1.jpg'
+                        photoUrl: ''
                       }
                 }),
                 
