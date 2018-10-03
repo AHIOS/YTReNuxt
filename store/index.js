@@ -7,6 +7,7 @@ Vue.use(Vuex)
 Vue.use(FeathersVuex)
 
 const createStore = () => {
+    console.log('creating store');
     return new Vuex.Store({
             plugins: [
                 service('users', {
