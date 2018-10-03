@@ -22,15 +22,15 @@
             <v-icon dark>arrow_drop_down</v-icon>
           </v-list-tile>
         <v-list>
-          <v-list-tile>
+          <v-list-tile @click="navTo('/settings')">
             <v-list-tile-action>
               <v-icon>settings</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Settings</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile>
+          <v-list-tile @click="navTo('/logout')">
             <v-list-tile-action>
-              <v-icon>exit_to_app</v-icon>
+              <v-icon>logout</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Logout</v-list-tile-title>
           </v-list-tile>
@@ -46,6 +46,7 @@
 
 <script>
 import TheDrawer from '@/components/TheDrawer';
+import { mapActions, mapGetters } from 'vuex'
 export default {
     components: {
       TheDrawer
@@ -63,12 +64,29 @@ export default {
         'profile'
       ]
     }),
-    methods:{
-      created: function () {
-        const {user} = this.$FeathersVuex;
-        console.log(user);
+    methods: {
+      ...mapActions('auth', ['authenticate', 'logout'])
+    },
+    computed: {
+      logged () {
+        return this.$store.state.auth.user
       }
     },
+    created: function () {
+      console.log('created header');
+      const {User} = this.$FeathersVuex;
+      const user = new User(this.user);
+      console.log(user);
+      console.log('is logged ' + this.logged);
+      this.authenticate(
+        'jwt'
+      ).catch(() => {
+        console.log(this.$store.state.auth.errorOnAuthenticate.message)
+      })
+    },
+    mounted: function () {
+      console.log('mounted header');
+    }
 }
 </script>
 
