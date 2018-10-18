@@ -1,27 +1,50 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
-import feathersVuex from 'feathers-vuex'
+import feathersVuex,  { initAuth } from 'feathers-vuex'
 import feathersClient from '../feathers-client'
-const { service, auth, FeathersVuex } = feathersVuex(feathersClient, { idField: '_id' })
-Vue.use(Vuex)
-Vue.use(FeathersVuex)
+const { service, auth } = feathersVuex(feathersClient, { idField: '_id' })
+
 
 const createStore = () => {
     console.log('creating store');
     return new Vuex.Store({
-            plugins: [
-                service('users', {
-                    instanceDefaults: {
-                        email: '',
-                        googleId: '',
-                        displayName: '',
-                        photoUrl: ''
-                      }
-                }),
-                
-                // Setup the auth plugin.
-                auth({ userService: 'users' })
-            ]
+        state: {},
+        mutations: {
+          increment (state) {
+            state.counter++
+          }
+        },
+        actions: {
+          nuxtServerInit ({ commit, dispatch }, { req }) {
+              console.log('nuxt server init')
+            return initAuth({
+              commit,
+              dispatch,
+              req,
+              moduleName: 'auth',
+              cookieName: 'feathers-jwt'
+            })
+          }
+        },
+        plugins: [
+            service('users', {
+                instanceDefaults: {
+                    email: '',
+                    googleId: '',
+                    displayName: '',
+                    photoUrl: ''
+                    }
+            }),
+            
+            // Setup the auth plugin.
+            auth({
+                state: {
+                    publicPages: [
+                      'login'
+                    ]
+                }, 
+                userService: 'users'
+            })
+        ]
      });
 }
 

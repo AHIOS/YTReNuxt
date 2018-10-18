@@ -1,4 +1,6 @@
 const pkg = require('./package')
+require('dotenv').config()
+
 
 const nodeExternals = require('webpack-node-externals')
 
@@ -55,13 +57,13 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/dotenv'
   ],
 
   proxy:{
     '/auth/google': { 
-      target: process.env.API_URL || 'http://localhost:3030/api/v1',
-      changeOrigin: true
+      target: process.env.API_URL || 'http://' + process.env.BE_URL + '/api/v1'
     }
   },
 
@@ -72,7 +74,7 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: process.env.API_URL || 'http://localhost:3030',
     // browserBaseURL: process.env.API_URL ? process.env.API_URL : '/api/v1',
-    // proxy: true,
+    proxy: true,
     debug: true
   },
 

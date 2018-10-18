@@ -4,7 +4,8 @@ import auth from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
 import { CookieStorage } from 'cookie-storage'
 
-const url = process.env._AXIOS_BASE_URL_;
+const url = process.env.BE_URL;
+console.log(url)
 
 const socket = io(url, {
     transports: ['websocket']

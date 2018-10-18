@@ -25,7 +25,9 @@
 <script>
 import TheDrawer from '@/components/TheDrawer';
 import UserAvatar from '@/components/UserAvatar';
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex';
+import * as Cookies from 'js-cookie'
+
 export default {
     components: {
       TheDrawer,
@@ -54,18 +56,28 @@ export default {
     },
     created: function () {
       console.log('created header');
-      const {User} = this.$FeathersVuex;
-      const user = new User(this.user);
-      console.log(user);
-      console.log('is logged ' + this.logged);
-      this.authenticate(
-        'jwt'
-      ).catch(() => {
-        console.log(this.$store.state.auth.errorOnAuthenticate.message)
-      })
+      var cookie = Cookies.get('feathers-jwt');
+      console.log(cookie);
+      // const {User} = this.$FeathersVuex;
+      // const user = new User(this.user);
+      // console.log(user);
+      // console.log('is logged ' + this.logged);
+      // cookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOiI1YmI1ZTE2OGIzMmMyYWQxZWQ1ZjVkMjciLCJpYXQiOjE1Mzg2NDY0NTIsImV4cCI6MTUzODczMjg1MiwiYXVkIjoiaHR0cHM6Ly95dHJlbWl4LmNvbSIsImlzcyI6Inl0cmVtaXgiLCJzdWIiOiJhdXRoIiwianRpIjoiZGM4ODVlMzktODI3ZC00ZDQ0LWFiMzYtMWVhZjkyYmI1YjJiIn0.gyADs2ihXQ3xyVDqWrFLs6NMwl1txTdHPrDr7sQQuls"
+      if (!!cookie) {
+        this.authenticate({ 
+          strategy: 'jwt', 
+          accessToken: cookie 
+        }
+        ).catch(() => {
+          console.log(this.$store.state.auth.errorOnAuthenticate.message)
+        }
+        )
+      }
+      
     },
     mounted: function () {
       console.log('mounted header');
+
     }
 }
 </script>
