@@ -46,14 +46,8 @@ export default {
         'profile'
       ]
     }),
-    methods: {
-      ...mapActions('auth', ['authenticate', 'logout'])
-    },
-    computed: {
-      logged () {
-        return this.$store.state.auth.user
-      }
-    },
+    methods: {},
+    computed: {},
     created: function () {
       console.log('created header');
       var cookie = Cookies.get('feathers-jwt');
@@ -64,16 +58,7 @@ export default {
       // cookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOiI1YmI1ZTE2OGIzMmMyYWQxZWQ1ZjVkMjciLCJpYXQiOjE1Mzg2NDY0NTIsImV4cCI6MTUzODczMjg1MiwiYXVkIjoiaHR0cHM6Ly95dHJlbWl4LmNvbSIsImlzcyI6Inl0cmVtaXgiLCJzdWIiOiJhdXRoIiwianRpIjoiZGM4ODVlMzktODI3ZC00ZDQ0LWFiMzYtMWVhZjkyYmI1YjJiIn0.gyADs2ihXQ3xyVDqWrFLs6NMwl1txTdHPrDr7sQQuls"
       if (!!cookie) {
         console.log(cookie)
-        this.authenticate({ 
-          strategy: 'jwt', 
-          accessToken: cookie 
-        }
-        ).catch(() => {
-          console.log(this.$store.state.auth.errorOnAuthenticate.message)
-        }
-        )
       }
-      
     },
     mounted: function () {
       console.log('mounted header');
