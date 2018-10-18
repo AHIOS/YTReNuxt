@@ -4,7 +4,7 @@ import socketio from '@feathersjs/socketio-client'
 import auth from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
 
-export const host = process.env.BE_URL || 'http://localhost:3030'
+export const host = process.env.FE_URL || 'http://localhost:3030'
 console.log('wsHost: ' + host)
 
 const socket = io(host, {
