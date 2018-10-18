@@ -16,6 +16,7 @@ const createStore = () => {
         actions: {
           nuxtServerInit ({ commit, dispatch }, { req }) {
               console.log('nuxt server init')
+              console.log('req ' + req)
             return initAuth({
               commit,
               dispatch,
